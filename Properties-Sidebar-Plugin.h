@@ -1,4 +1,6 @@
 #pragma once
+#define _USE_MATH_DEFINES
+#include <cmath>
 #include <QObject>
 #include <QDockWidget>
 #include <QLabel>
@@ -6,7 +8,6 @@
 #include <QMainWindow>
 
 // NGGAK PAKAI HEADER PLUGIN-NYA LIBRECAD LAGI
-// KITA BIKIN SENDIRI INTERFACE-NYA DI SINI
 class LC_PluginInterface
 {
 public:
@@ -16,8 +17,6 @@ public:
 };
 Q_DECLARE_INTERFACE(LC_PluginInterface, "org.librecad.LC_PluginInterface")
 
-// YANG RINGAN AJA, JANGAN PAKAI rs_document.h / rs_graphic.h
-// 2 FILE ITU YANG NARIK drw_classes.h
 #include "rs_entity.h"
 #include "rs_vector.h"
 
