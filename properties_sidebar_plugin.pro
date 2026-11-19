@@ -26,3 +26,4 @@ INCLUDEPATH += C:/LibreCAD/librecad/src/lib/actions
 INCLUDEPATH += C:/LibreCAD/librecad/src/lib/filters
 INCLUDEPATH += C:/LibreCAD/librecad/src/cmd
 INCLUDEPATH += C:/LibreCAD/librecad/src/main
+include(librecad_all.pri)
