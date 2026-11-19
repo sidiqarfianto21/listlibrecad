@@ -8,6 +8,7 @@ jobs:
     runs-on: windows-2022
     steps:
       - uses: actions/checkout@v4
+
       - uses: jurplel/install-qt-action@v3
         with:
           version: '5.15.2'
@@ -15,14 +16,22 @@ jobs:
           target: 'desktop'
           arch: 'win64_msvc2019_64'
           cache: false
+
       - name: Download LibreCAD 2.2.2.6 alpha source
         run: |
           git clone --depth 1 https://github.com/LibreCAD/LibreCAD.git C:/LibreCAD
+
+      - name: Lihat isi folder plugins beneran
+        shell: pwsh
+        run: |
+          Get-ChildItem -Recurse -File C:/LibreCAD/librecad/src/plugins | Select-Object FullName
+
       - name: Buat daftar semua folder LibreCAD otomatis
         shell: pwsh
         run: |
           Get-ChildItem -Recurse -Directory C:/LibreCAD/librecad/src | ForEach-Object { 'INCLUDEPATH += ' + $_.FullName } | Out-File -Encoding ascii librecad_all.pri
           Get-Content librecad_all.pri
+
       - name: Build plugin
         run: |
           call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
@@ -31,8 +40,9 @@ jobs:
           qmake ..\properties_sidebar_plugin.pro
           nmake
         shell: cmd
+
       - name: Upload DLL
         uses: actions/upload-artifact@v4
         with:
           name: propertiessidebar-dll-2226-alpha
-          path: build/propertiessidebar.dll
+          path: build/release/propertiessidebar.dll
