@@ -5,7 +5,7 @@ TEMPLATE = lib
 TARGET = propertiessidebar
 DESTDIR = release
 
-# INI YANG BARU, DIPAKSA C++17 BIAR std::optional KE-BACA
+# DIPAKSA C++17 BIAR std::optional KE-BACA
 QMAKE_CXXFLAGS += /std:c++17
 QMAKE_CXXFLAGS += /permissive-
 
@@ -17,7 +17,8 @@ INCLUDEPATH += C:/LibreCAD/librecad/src
 INCLUDEPATH += C:/LibreCAD/librecad/src/plugins
 INCLUDEPATH += C:/LibreCAD/librecad/src/lib
 
-# Folder dxflib - INI YANG BARU, BUAT drw_classes.h
+# Folder dxflib - download terpisah, bukan submodule lagi
+INCLUDEPATH += C:/dxflib/src
 INCLUDEPATH += C:/LibreCAD/libraries/dxflib/src
 INCLUDEPATH += C:/LibreCAD/libraries
 
