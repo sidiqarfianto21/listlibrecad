@@ -1,0 +1,32 @@
+name: Build LibreCAD Plugin - Properties Sidebar - v2.2.2.6 alpha
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+jobs:
+  build-windows:
+    runs-on: windows-2022
+    steps:
+      - uses: actions/checkout@v4
+      - uses: jurplel/install-qt-action@v3
+        with:
+          version: '5.15.2'
+          host: 'windows'
+          target: 'desktop'
+          arch: 'win64_msvc2019_64'
+          cache: true
+      - name: Download LibreCAD 2.2.2.6 alpha source
+        run: |
+          git clone --depth 1 https://github.com/LibreCAD/LibreCAD.git C:/LibreCAD
+      - name: Build plugin
+        run: |
+          mkdir build
+          cd build
+          qmake ..\properties_sidebar_plugin.pro "INCLUDEPATH+=C:/LibreCAD/librecad/src"
+          nmake
+        shell: cmd
+      - name: Upload DLL
+        uses: actions/upload-artifact@v4
+        with:
+          name: propertiessidebar-dll-2226-alpha
+          path: build/propertiessidebar.dll
