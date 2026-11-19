@@ -21,11 +21,6 @@ jobs:
         run: |
           git clone --depth 1 --recurse-submodules https://github.com/LibreCAD/LibreCAD.git C:/LibreCAD
 
-      - name: Download dxflib terpisah - buat drw_classes.h
-        run: |
-          git clone --depth 1 https://github.com/LibreCAD/dxflib.git C:/dxflib
-          dir C:/dxflib/src
-
       - name: Lihat isi folder plugins beneran
         shell: pwsh
         run: |
