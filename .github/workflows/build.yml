@@ -18,10 +18,9 @@ jobs:
       - name: Download LibreCAD 2.2.2.6 alpha source
         run: |
           git clone --depth 1 https://github.com/LibreCAD/LibreCAD.git C:/LibreCAD
-      - name: Cari dimana rs_polyline.h ngumpet
+      - name: Cari dimana rs_entitycontainer.h ngumpet
         run: |
-          dir /s C:\LibreCAD\librecad\src\rs_polyline.h
-          dir C:\LibreCAD\librecad\src\lib\engine
+          dir /s C:\LibreCAD\librecad\src\rs_entitycontainer.h
         shell: cmd
       - name: Build plugin
         run: |
