@@ -18,12 +18,17 @@ jobs:
       - name: Download LibreCAD 2.2.2.6 alpha source
         run: |
           git clone --depth 1 https://github.com/LibreCAD/LibreCAD.git C:/LibreCAD
+      - name: Cari dimana rs_polyline.h ngumpet
+        run: |
+          dir /s C:\LibreCAD\librecad\src\rs_polyline.h
+          dir C:\LibreCAD\librecad\src\lib\engine
+        shell: cmd
       - name: Build plugin
         run: |
           call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
           mkdir build
           cd build
-          qmake ..\properties_sidebar_plugin.pro "INCLUDEPATH+=C:/LibreCAD/librecad/src"
+          qmake ..\properties_sidebar_plugin.pro
           nmake
         shell: cmd
       - name: Upload DLL
