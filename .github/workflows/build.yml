@@ -8,9 +8,6 @@ jobs:
     runs-on: windows-2022
     steps:
       - uses: actions/checkout@v4
-      - uses: ilammy/msvc-dev-cmd@v1
-        with:
-          arch: x64
       - uses: jurplel/install-qt-action@v3
         with:
           version: '5.15.2'
@@ -23,6 +20,7 @@ jobs:
           git clone --depth 1 https://github.com/LibreCAD/LibreCAD.git C:/LibreCAD
       - name: Build plugin
         run: |
+          call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
           mkdir build
           cd build
           qmake ..\properties_sidebar_plugin.pro "INCLUDEPATH+=C:/LibreCAD/librecad/src"
