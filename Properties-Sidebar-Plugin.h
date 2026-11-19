@@ -13,7 +13,7 @@
 class PropertiesSidebarPlugin : public QObject, public LC_PluginInterface
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID LC_PluginInterface_iid FILE "properties_sidebar_plugin.json")
+    Q_PLUGIN_METADATA(IID "org.librecad.LC_PluginInterface" FILE "properties_sidebar_plugin.json")
     Q_INTERFACES(LC_PluginInterface)
 
 public:
