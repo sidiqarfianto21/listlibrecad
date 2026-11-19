@@ -1,45 +1,37 @@
-#ifndef PROPERTIES_SIDEBAR_PLUGIN_H
-#define PROPERTIES_SIDEBAR_PLUGIN_H
-
+#pragma once
 #include <QObject>
 #include <QDockWidget>
 #include <QLabel>
-#include <QSlider>
-#include "qc_plugininterface.h"
+#include <QVBoxLayout>
 
-class PropertiesSidebarPlugin : public QObject, public QC_PluginInterface {
+// INI YANG BARU, BUKAN QC_PluginInterface LAGI
+#include "lc_plugininterface.h"
+#include "rs_entity.h"
+#include "rs_document.h"
+#include "rs_graphic.h"
+
+class PropertiesSidebarPlugin : public QObject, public LC_PluginInterface
+{
     Q_OBJECT
-    Q_INTERFACES(QC_PluginInterface)
-public:
-    PropertiesSidebarPlugin();
-    virtual ~PropertiesSidebarPlugin();
-    virtual PluginCapabilities getCapabilities() const;
-    virtual QString name() const;
-    virtual void execCommmandLine(int cmd);
-    virtual void execAction(void* doc, void* view, int action);
+    Q_PLUGIN_METADATA(IID LC_PluginInterface_iid FILE "properties_sidebar_plugin.json")
+    Q_INTERFACES(LC_PluginInterface)
 
-public slots:
-    void onSelectionChanged();
-    void onTransparencyChanged(int value);
-    void onFadeChanged(int value);
+public:
+    PropertiesSidebarPlugin() = default;
+    ~PropertiesSidebarPlugin() override = default;
+
+    // Wajib ada di LC_PluginInterface baru
+    QString getName() const override { return QString("PropertiesSidebar"); }
+    QString getVersion() const override { return QString("1.0"); }
+    QString getDescription() const override { return QString("Properties Sidebar - Luas, Keliling, Centroid"); }
+
+    void init(QMainWindow* mainWindow) override;
+    void unload() override;
 
 private:
-    QDockWidget* dockProps = nullptr;
-    QDockWidget* dockRaster = nullptr;
-    QLabel* lblLuas = nullptr;
-    QLabel* lblKeliling = nullptr;
-    QLabel* lblCentroid = nullptr;
-    QLabel* lblTitik = nullptr;
-    QLabel* lblLayer = nullptr;
-    QLabel* lblInfo = nullptr;
-    QSlider* slTransparency = nullptr;
-    QSlider* slFade = nullptr;
-    void* currentDoc = nullptr;
-    void* currentView = nullptr;
-    void createPropsDock(QWidget* mainWin);
-    void createRasterDock(QWidget* mainWin);
-    void updatePropsForSelected();
-    void applyRasterToSelected();
-};
+    QMainWindow* m_mainWindow = nullptr;
+    QDockWidget* m_dock = nullptr;
+    QLabel* m_label = nullptr;
 
-#endif
+    void updateForEntity(RS_Entity* e);
+};
