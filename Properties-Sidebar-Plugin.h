@@ -4,7 +4,6 @@
 #include <QLabel>
 #include <QVBoxLayout>
 
-// INI YANG BARU, BUKAN QC_PluginInterface LAGI
 #include "lc_plugininterface.h"
 #include "rs_entity.h"
 #include "rs_document.h"
@@ -14,16 +13,20 @@ class PropertiesSidebarPlugin : public QObject, public LC_PluginInterface
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.librecad.LC_PluginInterface" FILE "properties_sidebar_plugin.json")
-    Q_INTERFACES(LC_PluginInterface)
+    // Q_INTERFACES DIBUANG, INI YANG BIKIN ERROR TADI
 
 public:
     PropertiesSidebarPlugin() = default;
     ~PropertiesSidebarPlugin() override = default;
 
-    // Wajib ada di LC_PluginInterface baru
-    QString getName() const override { return QString("PropertiesSidebar"); }
-    QString getVersion() const override { return QString("1.0"); }
-    QString getDescription() const override { return QString("Properties Sidebar - Luas, Keliling, Centroid"); }
+    // Kita sediain 2 versi nama, biar nggak salah lagi
+    QString getName() const { return QString("PropertiesSidebar"); }
+    QString getVersion() const { return QString("1.0"); }
+    QString getDescription() const { return QString("Properties Sidebar - Luas, Keliling, Centroid"); }
+
+    QString getPluginName() const { return QString("PropertiesSidebar"); }
+    QString getPluginVersion() const { return QString("1.0"); }
+    QString getPluginDescription() const { return QString("Properties Sidebar - Luas, Keliling, Centroid"); }
 
     void init(QMainWindow* mainWindow) override;
     void unload() override;
