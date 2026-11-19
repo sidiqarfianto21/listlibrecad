@@ -1,3 +1,5 @@
+#define _USE_MATH_DEFINES
+#include <cmath>
 #include "Properties-Sidebar-Plugin.h"
 #include <QMainWindow>
 #include <QStatusBar>
@@ -5,7 +7,7 @@
 #include "rs_line.h"
 #include "rs_circle.h"
 #include "rs_arc.h"
-#include "rs_layer.h" // INI YANG KURANG TADI
+#include "rs_layer.h"
 #include "rs_vector.h"
 #include "rs_entitycontainer.h"
 
@@ -26,7 +28,6 @@ void PropertiesSidebarPlugin::init(QMainWindow* mainWindow)
     w->setLayout(lay);
     m_dock->setWidget(w);
 
-    // INI FIX-NYA: addDockWidget itu punya QMainWindow, bukan QWidget
     m_mainWindow->addDockWidget(Qt::RightDockWidgetArea, m_dock);
 }
 
@@ -45,7 +46,6 @@ void PropertiesSidebarPlugin::updateForEntity(RS_Entity* e)
 
     auto* pl = static_cast<RS_Polyline*>(e);
 
-    // INI FIX getVertices: di 2.2 pakai cara iterasi container
     QList<RS_Vector> pts;
     for (RS_Entity* sub = pl->firstEntity(RS2::ResolveNone);
          sub != nullptr;
@@ -59,7 +59,6 @@ void PropertiesSidebarPlugin::updateForEntity(RS_Entity* e)
 
     if (pts.size() < 3) return;
 
-    // Shoelace - Luas
     double area2 = 0;
     double cx = 0, cy = 0;
     double perim = 0;
