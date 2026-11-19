@@ -1,5 +1,5 @@
 
-#include "properties_sidebar_plugin.h"
+#include "Properties-Sidebar-Plugin.h"
 #include <QVBoxLayout>
 #include <QWidget>
 #include <QPushButton>
