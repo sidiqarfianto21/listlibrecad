@@ -5,8 +5,8 @@
 #include <QVBoxLayout>
 #include <QMainWindow>
 
-// NGGAK ADA LAGI #include "lc_plugininterface.h"
-// KITA BIKIN SENDIRI INTERFACE-NYA DI SINI, BIAR NGGAK NEBAK-NEBAK FILE LAGI
+// NGGAK PAKAI HEADER PLUGIN-NYA LIBRECAD LAGI
+// KITA BIKIN SENDIRI INTERFACE-NYA DI SINI
 class LC_PluginInterface
 {
 public:
@@ -16,9 +16,10 @@ public:
 };
 Q_DECLARE_INTERFACE(LC_PluginInterface, "org.librecad.LC_PluginInterface")
 
+// YANG RINGAN AJA, JANGAN PAKAI rs_document.h / rs_graphic.h
+// 2 FILE ITU YANG NARIK drw_classes.h
 #include "rs_entity.h"
-#include "rs_document.h"
-#include "rs_graphic.h"
+#include "rs_vector.h"
 
 class PropertiesSidebarPlugin : public QObject, public LC_PluginInterface
 {
@@ -33,6 +34,10 @@ public:
     QString getName() const { return QString("PropertiesSidebar"); }
     QString getVersion() const { return QString("1.0"); }
     QString getDescription() const { return QString("Properties Sidebar - Luas, Keliling, Centroid"); }
+
+    QString getPluginName() const { return QString("PropertiesSidebar"); }
+    QString getPluginVersion() const { return QString("1.0"); }
+    QString getPluginDescription() const { return QString("Properties Sidebar - Luas, Keliling, Centroid"); }
 
     void init(QMainWindow* mainWindow) override;
     void unload() override;
