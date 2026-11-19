@@ -10,6 +10,7 @@ INCLUDEPATH += C:/LibreCAD/librecad/src/lib
 INCLUDEPATH += C:/LibreCAD/librecad/src/lib/engine
 INCLUDEPATH += C:/LibreCAD/librecad/src/lib/engine/document
 INCLUDEPATH += C:/LibreCAD/librecad/src/lib/engine/document/entities
+INCLUDEPATH += C:/LibreCAD/librecad/src/lib/engine/document/container
 INCLUDEPATH += C:/LibreCAD/librecad/src/lib/engine/math
 INCLUDEPATH += C:/LibreCAD/librecad/src/lib/gui
 INCLUDEPATH += C:/LibreCAD/librecad/src/lib/math
