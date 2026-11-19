@@ -1,29 +1,27 @@
+QT += widgets gui core
+CONFIG += plugin c++17
 TEMPLATE = lib
-CONFIG += plugin
-QT += widgets gui
+
 TARGET = propertiessidebar
-HEADERS += Properties-Sidebar-Plugin.h
+DESTDIR = release
+
+# INI YANG BARU, DIPAKSA C++17 BIAR std::optional KE-BACA
+QMAKE_CXXFLAGS += /std:c++17
+QMAKE_CXXFLAGS += /permissive-
+
 SOURCES += Properties-Sidebar-Plugin.cpp
+HEADERS += Properties-Sidebar-Plugin.h
+
+# Folder dasar LibreCAD
 INCLUDEPATH += C:/LibreCAD/librecad/src
 INCLUDEPATH += C:/LibreCAD/librecad/src/plugins
 INCLUDEPATH += C:/LibreCAD/librecad/src/lib
-INCLUDEPATH += C:/LibreCAD/librecad/src/lib/engine
-INCLUDEPATH += C:/LibreCAD/librecad/src/lib/engine/document
-INCLUDEPATH += C:/LibreCAD/librecad/src/lib/engine/document/entities
-INCLUDEPATH += C:/LibreCAD/librecad/src/lib/engine/document/container
-INCLUDEPATH += C:/LibreCAD/librecad/src/lib/engine/document/selection
-INCLUDEPATH += C:/LibreCAD/librecad/src/lib/engine/selection
-INCLUDEPATH += C:/LibreCAD/librecad/src/lib/engine/math
-INCLUDEPATH += C:/LibreCAD/librecad/src/lib/engine/undo
-INCLUDEPATH += C:/LibreCAD/librecad/src/lib/engine/clipboard
-INCLUDEPATH += C:/LibreCAD/librecad/src/lib/engine/overlays
-INCLUDEPATH += C:/LibreCAD/librecad/src/lib/engine/settings
-INCLUDEPATH += C:/LibreCAD/librecad/src/lib/engine/utils
-INCLUDEPATH += C:/LibreCAD/librecad/src/lib/gui
-INCLUDEPATH += C:/LibreCAD/librecad/src/lib/gui/selection
-INCLUDEPATH += C:/LibreCAD/librecad/src/lib/math
-INCLUDEPATH += C:/LibreCAD/librecad/src/lib/actions
-INCLUDEPATH += C:/LibreCAD/librecad/src/lib/filters
-INCLUDEPATH += C:/LibreCAD/librecad/src/cmd
-INCLUDEPATH += C:/LibreCAD/librecad/src/main
+
+# Folder dxflib - INI YANG BARU, BUAT drw_classes.h
+INCLUDEPATH += C:/LibreCAD/libraries/dxflib/src
+INCLUDEPATH += C:/LibreCAD/libraries
+
+# Semua folder LibreCAD yang dibuat otomatis sama build.yml
 include(librecad_all.pri)
+
+DEFINES += QT_PLUGIN
